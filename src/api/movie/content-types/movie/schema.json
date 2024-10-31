@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "movies",
+  "info": {
+    "singularName": "movie",
+    "pluralName": "movies",
+    "displayName": "Movies"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Summary": {
+      "type": "text"
+    },
+    "Genre": {
+      "type": "string"
+    },
+    "Director": {
+      "type": "string"
+    },
+    "Actors": {
+      "type": "string"
+    },
+    "IMDBRating": {
+      "type": "string"
+    },
+    "IMDBId": {
+      "type": "string"
+    },
+    "Poster": {
+      "type": "string"
+    },
+    "RottenTomatoesRating": {
+      "type": "integer"
+    }
+  }
+}

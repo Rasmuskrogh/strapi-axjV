@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "liked_movies",
+  "info": {
+    "singularName": "liked-movie",
+    "pluralName": "liked-movies",
+    "displayName": "LikedMovies"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "IMDBId": {
+      "type": "string"
+    }
+  }
+}

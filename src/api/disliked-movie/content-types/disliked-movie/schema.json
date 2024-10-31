@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "disliked_movies",
+  "info": {
+    "singularName": "disliked-movie",
+    "pluralName": "disliked-movies",
+    "displayName": "DislikedMovies"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "IMDBId": {
+      "type": "string"
+    }
+  }
+}
