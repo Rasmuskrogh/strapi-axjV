@@ -368,12 +368,18 @@ export interface ApiDislikedMovieDislikedMovie extends Schema.CollectionType {
     singularName: 'disliked-movie';
     pluralName: 'disliked-movies';
     displayName: 'DislikedMovies';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     IMDBId: Attribute.String;
+    users_permissions_user: Attribute.Relation<
+      'api::disliked-movie.disliked-movie',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -398,12 +404,18 @@ export interface ApiLikedMovieLikedMovie extends Schema.CollectionType {
     singularName: 'liked-movie';
     pluralName: 'liked-movies';
     displayName: 'LikedMovies';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     IMDBId: Attribute.String;
+    users_permissions_user: Attribute.Relation<
+      'api::liked-movie.liked-movie',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -466,12 +478,18 @@ export interface ApiSeenMovieSeenMovie extends Schema.CollectionType {
     singularName: 'seen-movie';
     pluralName: 'seen-movies';
     displayName: 'Seen Movies';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     IMDBId: Attribute.String;
+    users_permissions_user: Attribute.Relation<
+      'api::seen-movie.seen-movie',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -853,6 +871,21 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
     >;
     firstname: Attribute.String;
     lastname: Attribute.String;
+    liked_movies: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::liked-movie.liked-movie'
+    >;
+    seen_movies: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::seen-movie.seen-movie'
+    >;
+    disliked_movies: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::disliked-movie.disliked-movie'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

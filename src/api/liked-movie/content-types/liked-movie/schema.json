@@ -4,7 +4,8 @@
   "info": {
     "singularName": "liked-movie",
     "pluralName": "liked-movies",
-    "displayName": "LikedMovies"
+    "displayName": "LikedMovies",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -13,6 +14,12 @@
   "attributes": {
     "IMDBId": {
       "type": "string"
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "liked_movies"
     }
   }
 }

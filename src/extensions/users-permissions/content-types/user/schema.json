@@ -70,6 +70,24 @@
     },
     "lastname": {
       "type": "string"
+    },
+    "liked_movies": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::liked-movie.liked-movie",
+      "mappedBy": "users_permissions_user"
+    },
+    "seen_movies": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::seen-movie.seen-movie",
+      "mappedBy": "users_permissions_user"
+    },
+    "disliked_movies": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::disliked-movie.disliked-movie",
+      "mappedBy": "users_permissions_user"
     }
   }
 }
