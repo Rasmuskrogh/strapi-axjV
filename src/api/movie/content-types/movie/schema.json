@@ -4,7 +4,8 @@
   "info": {
     "singularName": "movie",
     "pluralName": "movies",
-    "displayName": "Movies"
+    "displayName": "Movies",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -30,13 +31,32 @@
       "type": "string"
     },
     "IMDBId": {
-      "type": "string"
+      "type": "string",
+      "unique": true
     },
     "Poster": {
       "type": "string"
     },
     "RottenTomatoesRating": {
       "type": "integer"
+    },
+    "disliked_movies": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::disliked-movie.disliked-movie",
+      "mappedBy": "movies"
+    },
+    "liked_movies": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::liked-movie.liked-movie",
+      "mappedBy": "movies"
+    },
+    "seen_movies": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::seen-movie.seen-movie",
+      "mappedBy": "movies"
     }
   }
 }

@@ -71,23 +71,23 @@
     "lastname": {
       "type": "string"
     },
-    "liked_movies": {
+    "disliked_movies": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::liked-movie.liked-movie",
-      "mappedBy": "users_permissions_user"
+      "relation": "manyToMany",
+      "target": "api::disliked-movie.disliked-movie",
+      "mappedBy": "users_permissions_users"
     },
     "seen_movies": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "manyToMany",
       "target": "api::seen-movie.seen-movie",
-      "mappedBy": "users_permissions_user"
+      "mappedBy": "users_permissions_users"
     },
-    "disliked_movies": {
+    "liked_movies": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::disliked-movie.disliked-movie",
-      "mappedBy": "users_permissions_user"
+      "relation": "manyToMany",
+      "target": "api::liked-movie.liked-movie",
+      "mappedBy": "users_permissions_users"
     }
   }
 }

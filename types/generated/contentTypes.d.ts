@@ -362,152 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiDislikedMovieDislikedMovie extends Schema.CollectionType {
-  collectionName: 'disliked_movies';
-  info: {
-    singularName: 'disliked-movie';
-    pluralName: 'disliked-movies';
-    displayName: 'DislikedMovies';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    IMDBId: Attribute.String;
-    users_permissions_user: Attribute.Relation<
-      'api::disliked-movie.disliked-movie',
-      'manyToOne',
-      'plugin::users-permissions.user'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::disliked-movie.disliked-movie',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::disliked-movie.disliked-movie',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiLikedMovieLikedMovie extends Schema.CollectionType {
-  collectionName: 'liked_movies';
-  info: {
-    singularName: 'liked-movie';
-    pluralName: 'liked-movies';
-    displayName: 'LikedMovies';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    IMDBId: Attribute.String;
-    users_permissions_user: Attribute.Relation<
-      'api::liked-movie.liked-movie',
-      'manyToOne',
-      'plugin::users-permissions.user'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::liked-movie.liked-movie',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::liked-movie.liked-movie',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiMovieMovie extends Schema.CollectionType {
-  collectionName: 'movies';
-  info: {
-    singularName: 'movie';
-    pluralName: 'movies';
-    displayName: 'Movies';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Title: Attribute.String;
-    Summary: Attribute.Text;
-    Genre: Attribute.String;
-    Director: Attribute.String;
-    Actors: Attribute.String;
-    IMDBRating: Attribute.String;
-    IMDBId: Attribute.String;
-    Poster: Attribute.String;
-    RottenTomatoesRating: Attribute.Integer;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::movie.movie',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::movie.movie',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiSeenMovieSeenMovie extends Schema.CollectionType {
-  collectionName: 'seen_movies';
-  info: {
-    singularName: 'seen-movie';
-    pluralName: 'seen-movies';
-    displayName: 'Seen Movies';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    IMDBId: Attribute.String;
-    users_permissions_user: Attribute.Relation<
-      'api::seen-movie.seen-movie',
-      'manyToOne',
-      'plugin::users-permissions.user'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::seen-movie.seen-movie',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::seen-movie.seen-movie',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -871,20 +725,20 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
     >;
     firstname: Attribute.String;
     lastname: Attribute.String;
-    liked_movies: Attribute.Relation<
+    disliked_movies: Attribute.Relation<
       'plugin::users-permissions.user',
-      'oneToMany',
-      'api::liked-movie.liked-movie'
+      'manyToMany',
+      'api::disliked-movie.disliked-movie'
     >;
     seen_movies: Attribute.Relation<
       'plugin::users-permissions.user',
-      'oneToMany',
+      'manyToMany',
       'api::seen-movie.seen-movie'
     >;
-    disliked_movies: Attribute.Relation<
+    liked_movies: Attribute.Relation<
       'plugin::users-permissions.user',
-      'oneToMany',
-      'api::disliked-movie.disliked-movie'
+      'manyToMany',
+      'api::liked-movie.liked-movie'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -950,6 +804,180 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiDislikedMovieDislikedMovie extends Schema.CollectionType {
+  collectionName: 'disliked_movies';
+  info: {
+    singularName: 'disliked-movie';
+    pluralName: 'disliked-movies';
+    displayName: 'DislikedMovies';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    users_permissions_users: Attribute.Relation<
+      'api::disliked-movie.disliked-movie',
+      'manyToMany',
+      'plugin::users-permissions.user'
+    >;
+    movies: Attribute.Relation<
+      'api::disliked-movie.disliked-movie',
+      'manyToMany',
+      'api::movie.movie'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::disliked-movie.disliked-movie',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::disliked-movie.disliked-movie',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiLikedMovieLikedMovie extends Schema.CollectionType {
+  collectionName: 'liked_movies';
+  info: {
+    singularName: 'liked-movie';
+    pluralName: 'liked-movies';
+    displayName: 'LikedMovies';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    users_permissions_users: Attribute.Relation<
+      'api::liked-movie.liked-movie',
+      'manyToMany',
+      'plugin::users-permissions.user'
+    >;
+    movies: Attribute.Relation<
+      'api::liked-movie.liked-movie',
+      'manyToMany',
+      'api::movie.movie'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::liked-movie.liked-movie',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::liked-movie.liked-movie',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiMovieMovie extends Schema.CollectionType {
+  collectionName: 'movies';
+  info: {
+    singularName: 'movie';
+    pluralName: 'movies';
+    displayName: 'Movies';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Title: Attribute.String;
+    Summary: Attribute.Text;
+    Genre: Attribute.String;
+    Director: Attribute.String;
+    Actors: Attribute.String;
+    IMDBRating: Attribute.String;
+    IMDBId: Attribute.String & Attribute.Unique;
+    Poster: Attribute.String;
+    RottenTomatoesRating: Attribute.Integer;
+    disliked_movies: Attribute.Relation<
+      'api::movie.movie',
+      'manyToMany',
+      'api::disliked-movie.disliked-movie'
+    >;
+    liked_movies: Attribute.Relation<
+      'api::movie.movie',
+      'manyToMany',
+      'api::liked-movie.liked-movie'
+    >;
+    seen_movies: Attribute.Relation<
+      'api::movie.movie',
+      'manyToMany',
+      'api::seen-movie.seen-movie'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::movie.movie',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::movie.movie',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSeenMovieSeenMovie extends Schema.CollectionType {
+  collectionName: 'seen_movies';
+  info: {
+    singularName: 'seen-movie';
+    pluralName: 'seen-movies';
+    displayName: 'Seen Movies';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    users_permissions_users: Attribute.Relation<
+      'api::seen-movie.seen-movie',
+      'manyToMany',
+      'plugin::users-permissions.user'
+    >;
+    movies: Attribute.Relation<
+      'api::seen-movie.seen-movie',
+      'manyToMany',
+      'api::movie.movie'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::seen-movie.seen-movie',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::seen-movie.seen-movie',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -960,10 +988,6 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::disliked-movie.disliked-movie': ApiDislikedMovieDislikedMovie;
-      'api::liked-movie.liked-movie': ApiLikedMovieLikedMovie;
-      'api::movie.movie': ApiMovieMovie;
-      'api::seen-movie.seen-movie': ApiSeenMovieSeenMovie;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -972,6 +996,10 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::disliked-movie.disliked-movie': ApiDislikedMovieDislikedMovie;
+      'api::liked-movie.liked-movie': ApiLikedMovieLikedMovie;
+      'api::movie.movie': ApiMovieMovie;
+      'api::seen-movie.seen-movie': ApiSeenMovieSeenMovie;
     }
   }
 }

@@ -12,13 +12,16 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "IMDBId": {
-      "type": "string"
-    },
-    "users_permissions_user": {
+    "users_permissions_users": {
       "type": "relation",
-      "relation": "manyToOne",
+      "relation": "manyToMany",
       "target": "plugin::users-permissions.user",
+      "inversedBy": "disliked_movies"
+    },
+    "movies": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::movie.movie",
       "inversedBy": "disliked_movies"
     }
   }
